@@ -143,7 +143,7 @@ static int __init vencrypt_init(void) {
   struct vencrypt_dev *dev;
 
   // Allocate a device number
-  ret = alloc_chrdev_region(&dev_num, 0, 2, DEVICE_NAME);
+  ret = alloc_chrdev_region(&dev_num, 0, 2, DEVICE_NAME_CT);
   if (ret < 0) {
     pr_err("Failed to allocate device number\n");
     return ret;
@@ -216,7 +216,7 @@ err_alloc:
 
 // Module cleanup
 static void __exit vencrypt_exit(void) {
-  dev_t dev_num = MKDEV(MAJOR(register_chrdev_region(0, 1, DEVICE_NAME)), 0);
+  dev_t dev_num = MKDEV(MAJOR(register_chrdev_region(0, 1, DEVICE_NAME_CT)), 0);
   struct vencrypt_dev *dev = container_of(cdev_get(dev_num), struct vencrypt_dev, cdev);
 
   // Release resources
